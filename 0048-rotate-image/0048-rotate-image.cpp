@@ -24,7 +24,10 @@ public:
         
         for(int i =0;i<n;i++)
         {
-            reverse(matrix[i].begin(), matrix[i].end());
+            for(int j =0;j<n/2;j++)
+            {
+                swap(matrix[i][j], matrix[i][n-j-1]);
+            }
         }
     }
 };
