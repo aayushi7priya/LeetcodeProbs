@@ -1,7 +1,6 @@
 class Solution {
 public:
     
-    // don't use this code to understand logic
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
         
@@ -9,7 +8,8 @@ public:
             return;  // No rotation needed
         }
         
-        k = k % n;
+        k = k % n; //if k is multiple we will get the same array. it's the remainder we need to 
+        //be concerned if it's some edge case like array = [1,2] and k = 3
         
         reverse(nums.begin(), nums.end());
         
