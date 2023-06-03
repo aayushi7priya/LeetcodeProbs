@@ -1,18 +1,23 @@
 class Solution {
 public:
-    int dp[46];
-    
-    Solution() {
-        memset(dp, -1, sizeof(dp)); // Initialize dp array to -1
-    }
-    
-    int climbStairs(int n) {
-        if (n == 0)
-            return 1;
-        if (n < 0)
+    int n;
+    int dp[50];
+    int rec(int i)
+    {
+        if(i>n)
             return 0;
-        if (dp[n] != -1)
-            return dp[n];
-        return (dp[n] = climbStairs(n - 1) + climbStairs(n - 2));
+        if(i==n)
+            return 1;
+        if(dp[i]!=-1)
+            return dp[i];
+        int ans = 0;
+        ans = rec(i+1) + rec(i+2);
+        
+        return dp[i] = ans;
+    }
+    int climbStairs(int t) {
+        memset(dp,-1, sizeof(dp));
+        n = t;
+       return  rec(0);
     }
 };
