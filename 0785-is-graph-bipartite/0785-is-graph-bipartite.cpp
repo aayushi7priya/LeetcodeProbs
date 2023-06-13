@@ -2,37 +2,18 @@ class Solution {
 public:
     int vis[101];
     
-    bool bfs(int k, vector<vector<int>>& graph)
+    bool dfs(int k,int color, vector<vector<int>>& graph)
     {
-        vis[k] = 0;
-        queue<pair<int,int>>q;
-        q.push({k,0});
-        
-        while(!q.empty())
+        vis[k] = color;
+    
+        for(auto i: graph[k])
         {
-            int next = q.front().first;
-            int color = q.front().second;
-            
-            q.pop();
-            for(auto i : graph[next])
+            if(vis[i]==-1)
             {
-                if(vis[i] == -1)
-                {
-                    if(color == 1) 
-                    {
-                        vis[i] = 0; 
-                        q.push({i, 0});
-                    }
-                    else 
-                    {
-                        vis[i] = 1; 
-                        q.push({i, 1});
-                    }
-                }
-                else if(vis[i] == color)
-                        return false;
-  
+                if(dfs(i, 1 - color, graph)==false) return false;
             }
+            else if(vis[i] == color)
+                return false;
         }
         return true;
     }
@@ -44,7 +25,7 @@ public:
         for(int k =0;k<n;k++)
         {
             if(vis[k]==-1)
-                if(bfs(k,graph) == false) return false;
+                if(dfs(k,0,graph) == false) return false;
         }   
         return true;
     }
