@@ -2,7 +2,6 @@ class Solution {
 public:
     int vis[10002];
     int pathvis[10002];
-    int checknode[10002];
     vector<int>ans;
     bool dfscheck(int node,vector<vector<int>>& graph )
     {
@@ -22,7 +21,6 @@ public:
                 return true;
             }
         }
-        checknode[node] = 1;
         pathvis[node] = 0;
         return false;
     }
@@ -30,7 +28,6 @@ public:
         int v = graph.size();
         memset(vis, 0, sizeof(vis));
         memset(pathvis, 0, sizeof(pathvis));
-        memset(checknode, 0, sizeof(checknode));
         for(int i =0;i<v;i++)
         {
             if(!vis[i])
@@ -41,7 +38,7 @@ public:
         
         for(int i =0;i<v;i++)
         {
-            if(checknode[i]==1)
+            if(pathvis[i]==0)
                 ans.push_back(i);
         }
         
