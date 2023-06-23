@@ -27,10 +27,10 @@ public:
             while(n--)
             {
                 TreeNode* node = q.front();
-                level.push_back(node->val);
                 q.pop();
                 if(node -> left != NULL) q.push(node -> left);
                 if(node -> right != NULL) q.push(node -> right);
+                level.push_back(node->val);
             }
             ans.push_back(level);
         }
