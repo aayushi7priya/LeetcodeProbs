@@ -17,18 +17,13 @@ public:
     int findHeight(TreeNode* node)
     {
         if(node == NULL) return 0;
-        return 1 + max(findHeight(node -> left), findHeight(node -> right));
+        int lh = findHeight(node -> left);
+        int rh = findHeight(node -> right);
+        maxi = max(maxi, lh + rh);
+        return 1 + max(lh, rh);
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root == NULL) return 0;
-        
-        int lh = findHeight(root -> left);
-        int rh = findHeight(root -> right);
-        
-        maxi = max(maxi, lh + rh);
-        diameterOfBinaryTree(root -> left);
-        diameterOfBinaryTree(root -> right);
-        
+        findHeight(root); 
         return maxi;
     }
 };
