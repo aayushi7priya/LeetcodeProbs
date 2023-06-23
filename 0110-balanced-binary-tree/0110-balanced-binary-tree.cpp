@@ -11,28 +11,23 @@
  */
 class Solution {
 public:
-    //naive solution
-    //time complexity - O(N*N)
-    //just going and checking each and every node's subtree height 
-    int findHeight(TreeNode* node)
+    int findHeight(TreeNode* node, bool& isBalanced)
     {
         if(node == NULL) return 0;
         
-        return 1 + max(findHeight(node->left), findHeight(node->right));
+        int leftH = findHeight(node -> left, isBalanced);
+        int rightH = findHeight(node -> right, isBalanced);
+        
+        if(abs(leftH- rightH)>1) isBalanced = false;
+        
+        //return 1 + max(findHeight(node->left, isBalanced), findHeight(node->right, isBalanced));
+        return 1 + max(leftH, rightH);
     }
     
     bool isBalanced(TreeNode* root) {
+        bool ans = true;
+        findHeight(root, ans);
         
-        if(root == NULL) return true;
-        
-        int lh = findHeight(root -> left);
-        int rh = findHeight(root -> right);
-        
-        if(abs(lh-rh)>1) return false;
-        
-        else{
-            if(isBalanced(root->left)==false || isBalanced(root->right)==false) return false;
-        }
-        return true;
+        return ans;
     }
 };
