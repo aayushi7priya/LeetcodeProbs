@@ -1,19 +1,14 @@
 class Solution {
 public:
-    int n;
-    void rec(int i, vector<char>& s)
-    {
-        if(2*i<=n-1)
-        {
-            swap(s[i], s[n-1-i]);
-            rec(i+1, s);
-        }
-        else return;
-        
-    }
-    
+
     void reverseString(vector<char>& s) {
-        n = s.size();
-        rec(0, s);
+       int n = s.size();
+        int i =0, j = n-1;
+        while(i<j)
+        {
+            swap(s[i], s[j]);
+            i++;
+            j--;
+        }
     }
 };
