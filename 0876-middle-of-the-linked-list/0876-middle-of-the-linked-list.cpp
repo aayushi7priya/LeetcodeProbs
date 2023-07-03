@@ -11,26 +11,18 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        //find total length of list 
-        // n+1/2 
-        ListNode* current = head;
-        int n = 0;
-        while(current != nullptr)
+        //better approach fast and slow
+        //fast will reach end, slow will reach middle
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast!=nullptr && fast->next!=nullptr )
         {
-            n++;
-            current = current->next;
+            slow = slow->next;
+            fast = fast->next->next;
+            
         }
-        //cout<<n<<endl;
-        ListNode* current1 = head;
-        int i = 1;int max;
-        if(n%2!=0) max = (n+1)/2;
-        else max = (n+3)/2;
-        while(i<max)
-        {
-            //cout<<i<<" pehle ka i "<<endl;
-            i++;
-            current1 = current1->next;
-        }
-        return current1;
+        return slow;
     }
 };
