@@ -12,6 +12,23 @@ class Solution {
 public:
     int getDecimalValue(ListNode* head) {
         ListNode* current = head;
+        int num = 0;
+        while(current != nullptr)
+        {
+            num = 2*num + current -> val;
+            current = current -> next;
+            
+        }
+        return num;
+    }
+};
+
+//not so efficient , space complexity - o(n)
+
+/*class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode* current = head;
         vector<int> v;
         while(current != nullptr)
         {
@@ -28,3 +45,4 @@ public:
         return ans;
     }
 };
+*/
