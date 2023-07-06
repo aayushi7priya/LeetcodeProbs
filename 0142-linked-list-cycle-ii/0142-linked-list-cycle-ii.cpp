@@ -9,23 +9,30 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-       //can do it o(n) space complexity
+       //wapas se fast, slow wala
         
-        unordered_set<ListNode*> mp;
-        ListNode* curr = head;
-        
-        while(curr!=nullptr)
+        ListNode* slow = head;
+        ListNode* fast = head;
+        bool ans = false;
+        while(fast!=nullptr && fast->next!= nullptr)
         {
-            if(mp.find(curr)!=mp.end())
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow==fast)
             {
-                return curr;
-            }
-            else
-            {
-                mp.insert(curr);
-                curr = curr->next;
+                ans = true;
+                break;
             }
         }
-        return nullptr;
+        if(ans== false) return nullptr;
+                                      // slow wala pehle jaha tha wahi hai
+        fast = head;                 //fast ko starting point par le aaye 
+        while(fast!=slow)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        
+        return fast;
     }
 };
